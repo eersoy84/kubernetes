@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: bizleal-api-deployment
+  name: api
   namespace: bizleal
   labels:
     app: bizleal-api
@@ -23,10 +23,10 @@ spec:
       imagePullSecrets:
         - name: bizleal-api-sercret
       containers:
-        - name: bizlea-api
+        - name: backend
           image: eyupersoy/bizleal-api:1.0.0
-          imagePullPolicy: IfNotPresent
-          command: ["yarn", "start"]
+          imagePullPolicy: Always
+          command: ["node", "./dist/main.js"]
           ports:
             - containerPort: 5000
           resources:
