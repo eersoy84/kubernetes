@@ -24,9 +24,9 @@ spec:
         - name: bizleal-api-sercret
       containers:
         - name: backend
-          image: eyupersoy/bizleal-api:1.0.0
+          image: eyupersoy/bizleal-api:1.0.3
           imagePullPolicy: Always
-          command: ["node", "./dist/main.js"]
+          # command: ["node", "./dist/main.js"]
           ports:
             - containerPort: 5000
           resources:
