@@ -6,7 +6,7 @@ metadata:
   labels:
     app: bizleal-api
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: bizleal-api
@@ -24,23 +24,28 @@ spec:
         - name: bizleal-api-sercret
       containers:
         - name: backend
-          image: eyupersoy/bizleal-api:1.0.3
+          image: eyupersoy/bizleal-api:1.0.2
           imagePullPolicy: Always
-          # command: ["node", "./dist/main.js"]
           ports:
-            - containerPort: 5000
+            - name: liveness-port
+              containerPort: 5000
           resources:
             requests:
               cpu: "120m"
           envFrom:
-          - configMapRef:
-              name: bizleal-api-config
-          - secretRef:
-              name: mysql-secret
-              
+            - configMapRef:
+                name: bizleal-api-config
+            - secretRef:
+                name: mysql-secret
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: liveness-port
+            initialDelaySeconds: 10
+            failureThreshold: 4
+            periodSeconds: 60
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

@@ -18,7 +18,7 @@ spec:
   rules:
   - host: "bizleal.net"
     http:
-      paths:
+      paths:  
         - path: /
           pathType: Prefix
           backend:
