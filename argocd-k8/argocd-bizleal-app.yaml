@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bizleal-argocd
+  name: bizleal
   namespace: argocd
 spec:
   project: default
@@ -19,4 +19,4 @@ spec:
       - CreateNamespace=true
     automated:
       prune: true
-      selfHeal: true
+      selfHeal: false
